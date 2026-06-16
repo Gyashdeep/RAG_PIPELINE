@@ -1,8 +1,8 @@
 streamlit
 langchain
+langchain-chains
 langchain-core
 langchain-community
-langchain-chains
 langchain-huggingface
 langchain-groq
 faiss-cpu
