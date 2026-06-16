@@ -43,7 +43,7 @@ if uploaded_file and api_key:
     try:
         vector_db = get_vector_db(tmp_path)
         retriever = vector_db.as_retriever()
-        llm = ChatGroq(model="llama-3-70b-8192", temperature=0, groq_api_key=api_key)
+        llm = ChatGroq(model="llama-3.3-70b-versatile", temperature=0, groq_api_key=api_key)
         
         prompt = ChatPromptTemplate.from_template("""Answer based on context: {context} \n Question: {input}""")
         combine_docs_chain = create_stuff_documents_chain(llm, prompt)
