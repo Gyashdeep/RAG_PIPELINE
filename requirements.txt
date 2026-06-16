@@ -2,6 +2,7 @@ streamlit
 langchain
 langchain-core
 langchain-community
+langchain-chains
 langchain-huggingface
 langchain-groq
 faiss-cpu
