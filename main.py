@@ -8,7 +8,7 @@ from langchain_community.vectorstores import FAISS
 from langchain_groq import ChatGroq
 from langchain.chains.retrieval import create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
-from langchain_core.prompts import ChatPromptTemplateimport streamlit as st
+from langchain_core.prompts import ChatPromptTemplate
 st.set_page_config(page_title="Enterprise AI Data Factory", layout="wide")
 st.title("🤖 Enterprise AI Data Factory")
 
