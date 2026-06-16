@@ -45,7 +45,9 @@ if uploaded_file and api_key:
         if query:
             res = retrieval_chain.invoke({"input": query})
             st.write(res['answer'])
+            
     except Exception as e:
         st.error(f"Error: {e}")
     finally:
-        if os.path.exists(tmp_path): os.remove(tmp_path)
+        if os.path.exists(tmp_path):
+            os.remove(tmp_path)
