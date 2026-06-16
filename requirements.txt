@@ -1,6 +1,5 @@
 streamlit
 langchain
-langchain-chains
 langchain-core
 langchain-community
 langchain-huggingface
