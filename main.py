@@ -9,8 +9,8 @@ from langchain_groq import ChatGroq
 from langchain_classic.chains.retrieval import create_retrieval_chain
 from langchain_classic.chains.combine_documents import create_stuff_documents_chain
 from langchain_core.prompts import ChatPromptTemplate
-st.set_page_config(page_title="Enterprise AI Data Factory", layout="wide")
-st.title("🤖 Enterprise AI Data Factory")
+st.set_page_config(page_title="YASHLLM", layout="wide")
+st.title("🤖 YASHLLM⚡")
 
 # 1. Cached Embedding Model (Loads once)
 @st.cache_resource
