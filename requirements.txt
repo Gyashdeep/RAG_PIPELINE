@@ -1,9 +1,9 @@
-streamlit
-langchain-core
-langchain-community
+streamlit>=1.30.0
+langchain>=0.2.0
+langchain-core>=0.2.0
+langchain-community>=0.2.0
 langchain-huggingface
 langchain-groq
-langchain
 faiss-cpu
 pypdf
 sentence-transformers
