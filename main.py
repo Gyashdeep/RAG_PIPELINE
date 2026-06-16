@@ -2,20 +2,19 @@ import streamlit as st
 import os
 import tempfile
 
-# Standard modern imports
+# Standard imports
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_groq import ChatGroq
-
-# The specific, stable path for the modern retrieval chain
-from langchain.chains.retrieval import create_retrieval_chain
+from langchain.chains import create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_core.prompts import ChatPromptTemplate
 
 st.set_page_config(page_title="Enterprise AI Data Factory", layout="wide")
 st.title("🤖 Enterprise AI Data Factory")
+
 api_key = st.sidebar.text_input("Enter Groq API Key", type="password")
 uploaded_file = st.file_uploader("Upload your PDF", type="pdf")
 
@@ -25,7 +24,7 @@ if uploaded_file and api_key:
         tmp_path = tmp_file.name
 
     try:
-        with st.spinner("Processing PDF..."):
+        with st.spinner("Processing..."):
             loader = PyPDFLoader(tmp_path)
             docs = loader.load()
             splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
@@ -37,19 +36,15 @@ if uploaded_file and api_key:
             
             llm = ChatGroq(model="llama-3-70b-8192", temperature=0, groq_api_key=api_key)
             
-            prompt = ChatPromptTemplate.from_template("""Answer the question based on the provided context:
-            {context}
-            Question: {input}""")
+            prompt = ChatPromptTemplate.from_template("""Answer the question based on context: {context} \n Question: {input}""")
             
             combine_docs_chain = create_stuff_documents_chain(llm, prompt)
             retrieval_chain = create_retrieval_chain(retriever, combine_docs_chain)
         
         query = st.text_input("Ask a question:")
         if query:
-            response = retrieval_chain.invoke({"input": query})
-            st.markdown("### Answer")
-            st.write(response['answer'])
-                
+            res = retrieval_chain.invoke({"input": query})
+            st.write(res['answer'])
     except Exception as e:
         st.error(f"Error: {e}")
     finally:
