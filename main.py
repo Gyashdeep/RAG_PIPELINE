@@ -2,19 +2,20 @@ import streamlit as st
 import os
 import tempfile
 
-# Correct, stable imports for modern LangChain
+# Standard modern imports
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_groq import ChatGroq
-from langchain.chains import create_retrieval_chain
+
+# The specific, stable path for the modern retrieval chain
+from langchain.chains.retrieval import create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_core.prompts import ChatPromptTemplate
 
 st.set_page_config(page_title="Enterprise AI Data Factory", layout="wide")
 st.title("🤖 Enterprise AI Data Factory")
-
 api_key = st.sidebar.text_input("Enter Groq API Key", type="password")
 uploaded_file = st.file_uploader("Upload your PDF", type="pdf")
 
