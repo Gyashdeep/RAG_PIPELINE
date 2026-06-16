@@ -2,7 +2,7 @@ import streamlit as st
 import os
 import tempfile
 
-# Standard imports for LangChain 2026
+# Correct, stable imports for modern LangChain
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
@@ -36,7 +36,9 @@ if uploaded_file and api_key:
             
             llm = ChatGroq(model="llama-3-70b-8192", temperature=0, groq_api_key=api_key)
             
-            prompt = ChatPromptTemplate.from_template("""Answer based on context: {context} \n Question: {input}""")
+            prompt = ChatPromptTemplate.from_template("""Answer the question based on the provided context:
+            {context}
+            Question: {input}""")
             
             combine_docs_chain = create_stuff_documents_chain(llm, prompt)
             retrieval_chain = create_retrieval_chain(retriever, combine_docs_chain)
@@ -44,6 +46,7 @@ if uploaded_file and api_key:
         query = st.text_input("Ask a question:")
         if query:
             response = retrieval_chain.invoke({"input": query})
+            st.markdown("### Answer")
             st.write(response['answer'])
                 
     except Exception as e:
